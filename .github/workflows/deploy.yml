@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker image
-        run: docker build -t my-node-app .
+        run: |
+          docker build -t my-node-app .
+          echo "${secrets.SSH_HOST}" >> $GITHUB_OUTPUT
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
